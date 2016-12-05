@@ -1,0 +1,69 @@
+{
+  "name": "Weather_Stations_Map",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run clean && node server.js",
+    "build": "webpack --config webpack.config.prod.js",
+    "deploy": "npm run build && node utils/deploy.js",
+    "clean": "node utils/clean.js",
+    "lint": "eslint src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/masquel/weather-station-map"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "Alexey Belozertsev <grimzest@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/masquel/weather-station-map/issues"
+  },
+  "homepage": "https://github.com/masquel/weather-station-map#readme",
+  "dependencies": {
+    "immutable": "^3.8.1",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "react-redux": "^4.4.6",
+    "redux": "^3.6.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.5.3",
+    "axios": "^0.15.3",
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.8",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "colors": "^1.1.2",
+    "css-loader": "^0.26.1",
+    "delete": "^0.3.2",
+    "eslint": "^3.11.1",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.1",
+    "eslint-plugin-react": "^6.7.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
+    "gh-pages": "^0.12.0",
+    "glob": "^7.1.1",
+    "isomorphic-fetch": "^2.2.1",
+    "json-loader": "^0.5.4",
+    "lodash": "^4.17.2",
+    "postcss-loader": "^1.1.1",
+    "react-hot-loader": "^1.3.1",
+    "react-tabs": "^0.8.2",
+    "redux-devtools": "^3.3.1",
+    "redux-devtools-dock-monitor": "^1.1.1",
+    "redux-devtools-log-monitor": "^1.1.1",
+    "redux-logger": "^2.7.4",
+    "redux-thunk": "^2.1.0",
+    "style-loader": "^0.13.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^2.4.0",
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2"
+  }
+}
