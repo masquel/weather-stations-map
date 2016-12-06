@@ -7,4 +7,22 @@ export const ACTIONS = {
 };
 
 
-export const BBOX = "81.785055,30.995152,44.316396,-177.832973,2";
+export const mapConfig = {
+	center: [64.035690, 98.789344],
+	zoomControl: false,
+	zoom: 3,
+	maxZoom: 20,
+	minZoom: 3,
+	scrollwheel: false,
+	legends: true,
+	infoControl: false,
+	attributionControl: true
+};
+
+export const tileLayerConfig = {
+	uri: 'http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
+	params: {
+		minZoom: 3,
+		accessToken: 'pk.eyJ1IjoibWFzcSIsImEiOiJjaXdkeThzNjcwMDVmMm9rZm42MHN3bDdtIn0.i3TgNuzFBR0QhqPDewtUQA'
+	}
+};

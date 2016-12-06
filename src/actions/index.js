@@ -19,7 +19,6 @@ const loadStationsError = (error) => {
 }
 
 const setStations = (stations) => {
-	console.log(stations);
 	return {
 		type: ACTIONS.SET_STATIONS,
 		loading: false,
