@@ -57,7 +57,13 @@ class Stations extends Component {
 													</dl>
 												</div>
 											</Popup>
-											<CircleMarker center={[latitude,longitude]} radius={5}></CircleMarker>
+											<CircleMarker 
+												color={"#3498db"}
+												wieght={2}
+												opacity={0.8}
+												center={[latitude,longitude]} 
+												radius={5}
+											/>
 										</FeatureGroup>
 									)
 								})
