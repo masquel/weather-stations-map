@@ -2,6 +2,8 @@ import React, {Component,PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Map,Marker,Popup,TileLayer,CircleMarker,FeatureGroup} from 'react-leaflet';
 
+import 'reset-css/reset.css';
+import 'normalize.css';
 import 'leaflet/dist/leaflet.css';
 import './map.styl';
 
