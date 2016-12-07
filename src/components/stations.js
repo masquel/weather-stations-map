@@ -1,6 +1,6 @@
 import React, {Component,PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Map,Marker,Popup,TileLayer,Circle,FeatureGroup} from 'react-leaflet';
+import {Map,Marker,Popup,TileLayer,CircleMarker,FeatureGroup} from 'react-leaflet';
 
 import 'leaflet/dist/leaflet.css';
 import './map.styl';
@@ -39,14 +39,24 @@ class Stations extends Component {
 								url='http://{s}.tile.osm.org/{z}/{x}/{y}.png' 
 							/>
 							{
-								stations.map(({name,latitude,longitude,height})=>{
-									<FeatureGroup>
-										<Popup>
-											<dl><dt>Название:</dt><dd>{name}</dd></dl>
-											<dl><dt>Высота метеопл:</dt><dd>{height}</dd></dl>
-										</Popup>
-										<Circle center={[latitude,longitude]} radius={10}></Circle>
-									</FeatureGroup>
+								stations.map(({name,latitude,longitude,height}, index)=>{
+									return (
+										<FeatureGroup key={index}>
+											<Popup>
+												<div className="popup__info">
+													<dl className="popup__item">
+														<dt className="popup__item-key">Название:</dt>{' '}
+														<dd className="popup__item-value">{name}</dd>
+													</dl>
+													<dl className="popup__item">
+														<dt className="popup__item-key">Высота метеопл:</dt>{' '}
+														<dd className="popup__item-value">{height}</dd>
+													</dl>
+												</div>
+											</Popup>
+											<CircleMarker center={[latitude,longitude]} radius={5}></CircleMarker>
+										</FeatureGroup>
+									)
 								})
 							}
 						</Map>
