@@ -31,6 +31,7 @@ class Stations extends Component {
 		return (
 			<div>
 				{
+					loading ? (<p>Загрузка данных...</p>) :
 					stations &&	stations.length ? (
 						<Map
 							center={mapConfig.center}
