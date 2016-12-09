@@ -1,79 +1,66 @@
 import React, {Component,PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Map,Marker,Popup,TileLayer,CircleMarker,FeatureGroup} from 'react-leaflet';
+import {Grid,Row,Col} from 'react-bootstrap';
+
 
 import 'reset-css/reset.css';
 import 'normalize.css';
 import 'leaflet/dist/leaflet.css';
 import './map.styl';
 
-import {fetchStations} from '../actions/';
+import {fetchStations,setActiveDay,toggleHeatMap} from '../actions/';
 
-import {mapConfig} from '../config/consts';
+
+
+import Filter from './filter';
+import StationsMap from './stationsMap';
 
 class Stations extends Component {
 	constructor(props){
 		super(props);
+		this.onSetActiveDay = this.onSetActiveDay.bind(this);
 	}
 	componentDidMount(){
-		this.props.dispatch(fetchStations());
+		this.props.dispatch(fetchStations(this.props.filter.activeDay));
+	}
+	onSetActiveDay(e,day,props){
+		if(props.disabled) return;
+		if(props.selected){
+			this.props.dispatch(setActiveDay(null));
+		}else{
+			this.props.dispatch(setActiveDay(day));
+		}	
 	}
 	render(){
 		const {
 			dispatch,
-			stationsStore
+			stationsStore,
+			filter
 		} = this.props;
 		const {
 			stations,
 			loading
 		} = stationsStore;
-		console.log(mapConfig);
 		return (
-			<div>
-				{
-					loading ? (<p>Загрузка данных...</p>) :
-					stations &&	stations.length ? (
-						<Map
-							center={mapConfig.center}
-							zoom={mapConfig.zoom}
-						>
-							<TileLayer 
-								//attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-								url='http://{s}.tile.osm.org/{z}/{x}/{y}.png' 
-							/>
-							{
-								stations.map(({name,latitude,longitude,height}, index)=>{
-									return (
-										<FeatureGroup key={index}>
-											<Popup>
-												<div className="popup__info">
-													<dl className="popup__item">
-														<dt className="popup__item-key">Название:</dt>{' '}
-														<dd className="popup__item-value">{name}</dd>
-													</dl>
-													<dl className="popup__item">
-														<dt className="popup__item-key">Высота метеопл:</dt>{' '}
-														<dd className="popup__item-value">{height}</dd>
-													</dl>
-												</div>
-											</Popup>
-											<CircleMarker 
-												color={"#3498db"}
-												wieght={2}
-												opacity={0.8}
-												center={[latitude,longitude]} 
-												radius={5}
-											/>
-										</FeatureGroup>
-									)
-								})
-							}
-						</Map>
-					) : (
-						<div>Станций нет</div>
-					)
-				}
-			</div>
+			<Grid fluid>
+				<Row>
+					<Col md={3}>
+						<div className="h3 text-center">MOE APP: WEATHER STATIONS</div>
+						<Filter 
+							showHeatMap={filter.heatmap}
+							onToggleHeatMap={()=>{dispatch(toggleHeatMap())}}
+							activeDay={filter.activeDay}
+							onSelectDay={this.onSetActiveDay}
+							onSubmitFilter={()=>{dispatch(fetchStations(filter.activeDay))}}
+							loading={loading}
+						/>
+						
+					</Col>
+					<Col md={9}>
+						<StationsMap showHeatMap={filter.heatmap} stations={stations} />
+					</Col>
+				</Row>
+			</Grid>
 		)
 	}
 }

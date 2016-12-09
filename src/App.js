@@ -14,7 +14,7 @@ class App extends Component {
 		return (
 			<Provider store={store}>
 				<div>
-					<Stations></Stations>
+					<Stations />
 					{(process.env.NODE_ENV !== "production") && <DevTools/> }
 				</div>
 			</Provider>

@@ -39,3 +39,16 @@ export const fetchStations = () => {
 			.catch(error=> dispatch(loadStationsError(error)))
 	}
 }
+
+export const setActiveDay = (day) => {
+	return {
+		type: ACTIONS.SET_ACTIVE_DAY,
+		day
+	}
+}
+
+export const toggleHeatMap = () => {
+	return {
+		type: ACTIONS.TOGGLE_HEATMAP
+	}
+}
