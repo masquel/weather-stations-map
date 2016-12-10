@@ -1,9 +1,10 @@
 import {combineReducers} from 'redux';
-import {stationsLoad} from './stations';
+import {stationsLoad,stationDataLoad} from './stations';
 import {filter} from './filter';
 
 const weatherStattionsApp = combineReducers({
 	stationsStore: stationsLoad,
+	activeStation: stationDataLoad,
 	filter
 });
 

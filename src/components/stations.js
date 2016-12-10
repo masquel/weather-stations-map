@@ -8,11 +8,10 @@ import 'normalize.css';
 import 'leaflet/dist/leaflet.css';
 import './map.styl';
 
-import {fetchStations,setActiveDay,toggleHeatMap} from '../actions/';
+import {fetchStations,fetchStation,setActiveDay,toggleHeatMap} from '../actions/';
 
 
-
-import Filter from './filter';
+import ActiveStation from './activeStation';
 import StationsMap from './stationsMap';
 
 class Stations extends Component {
@@ -35,11 +34,11 @@ class Stations extends Component {
 		const {
 			dispatch,
 			stationsStore,
-			filter
+			filter,
+			activeStation
 		} = this.props;
 		const {
-			stations,
-			loading
+			stations
 		} = stationsStore;
 		return (
 			<Grid fluid>
@@ -54,9 +53,26 @@ class Stations extends Component {
 							onSubmitFilter={()=>{dispatch(fetchStations(filter.activeDay))}}
 							loading={loading}
 						/>*/}
+						{
+							stationsStore.loading && (<p className="text-center lead">Загрузка станций...</p>) 
+						}
+						{
+							stations.length && (
+								activeStation.station && 
+								(
+									<ActiveStation 
+										{...activeStation}
+									/>
+								)
+							)
+						}
+						
 					</Col>
 					<Col md={9}>
-						<StationsMap stations={stations} />
+						<StationsMap 
+							stations={stations} 
+							onStationClick={(id, name)=>{dispatch(fetchStation(id, name))}}
+						/>
 					</Col>
 				</Row>
 			</Grid>

@@ -8,7 +8,7 @@ export default class stationsMap extends Component {
 		super(props);
 	}
 	render() {
-		const {stations, showHeatMap} = this.props;
+		const {stations,onStationClick} = this.props;
 		return (
 			<Map
 				center={mapConfig.center}
@@ -72,6 +72,7 @@ export default class stationsMap extends Component {
 										parseFloat(long.value)
 									]} 
 									radius={5}
+									onClick={()=>onStationClick(stat_num.value,location_name.value)}
 								/>
 							</FeatureGroup>
 						)

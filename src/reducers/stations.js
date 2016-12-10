@@ -20,7 +20,7 @@ export const stationsLoad = (state = {loading: true, stations: []}, {type,loadin
 	}
 }
 
-/*export const stationDataLoad = (state = {station:[],loading:false}, {type,loading,station}) => {
+export const stationDataLoad = (state = {station:[],loading:false}, {type,loading,station}) => {
 	switch(type){
 		case ACTIONS.LOAD_STATION: {
 			return {
@@ -37,4 +37,4 @@ export const stationsLoad = (state = {loading: true, stations: []}, {type,loadin
 			return state
 
 	}
-}*/
+}
