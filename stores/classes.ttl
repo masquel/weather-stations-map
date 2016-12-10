@@ -1,0 +1,60 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dbr:  <http://dbpedia.org/resource/> .
+@prefix dbo:  <http://dbpedia.org/ontology/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix geo:  <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix mt: <http://example.org/meteo_ru_data/> .
+@prefix mto: <http://example.org/meteo_ru_data/ontology/> .
+@prefix mtr: <http://example.org/meteo_ru_data/resource/> .
+
+mto:w_measure   rdf:type   rdfs:Class .
+mto:w_st_loc   rdf:type   rdfs:Class .
+mto:w_st   rdf:type   rdfs:Class .
+
+mto:w_st   rdfs:subClassOf   dbo:Location .
+mto:w_st_loc   rdfs:subClassOf   dbo:Location .
+
+mto:st_measure  rdf:type  rdf:Property .
+mto:st_measure   rdfs:domain  mto:w_measure .
+mto:st_measure   rdfs:range  mto:w_st .
+
+mto:datem  rdf:type  rdf:Property .
+mto:datem   rdfs:domain  mto:w_measure .
+
+mto:tmin  rdf:type  rdf:Property .
+mto:tmin   rdfs:domain  mto:w_measure .
+
+mto:tmean  rdf:type  rdf:Property .
+mto:tmean   rdfs:domain  mto:w_measure .
+
+mto:tmax  rdf:type  rdf:Property .
+mto:tmax   rdfs:domain  mto:w_measure .
+
+
+mto:precip  rdf:type  rdf:Property .
+mto:precip   rdfs:domain  mto:w_measure .
+
+mto:tflag  rdf:type  rdf:Property .
+mto:tflag   rdfs:domain  mto:w_measure .
+
+mto:qtmin rdf:type  rdf:Property .
+mto:qtmin   rdfs:domain  mto:w_measure .
+
+mto:qtmax  rdf:type  rdf:Property .
+mto:qtmax   rdfs:domain  mto:w_measure .
+
+mto:qtmean  rdf:type  rdf:Property .
+mto:qtmean   rdfs:domain  mto:w_measure .
+
+mto:qr  rdf:type  rdf:Property .
+mto:qr  rdfs:domain  mto:w_measure .
+
+mto:cr  rdf:type  rdf:Property .
+mto:cr  rdfs:domain  mto:w_measure .
+
+mto:st_alt  rdf:type  rdf:Property .
+mto:st_alt  rdfs:domain  mto:w_st .
+
+mto:st_num  rdf:type  rdf:Property .
+mto:st_num  rdfs:domain  mto:w_st .
