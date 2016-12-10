@@ -35,7 +35,7 @@ export const fetchStations = () => {
 			.then(response =>{
 				console.log(response.data);
 				dispatch(
-					setStations(response.data)
+					setStations(response.data.results.bindings)
 				)
 			})
 			.catch(error=> dispatch(loadStationsError(error)))

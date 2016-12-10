@@ -15,14 +15,14 @@ export default class stationsMap extends Component {
 				zoom={mapConfig.zoom}
 			>
 				{
-					showHeatMap && (
+					/*showHeatMap && (
 						<HeatmapLayer
 							points={stations}
-							longitudeExtractor={m => m.longitude}
-							latitudeExtractor={m => m.latitude}
-							intensityExtractor={m => parseFloat(m.height)} 
+							longitudeExtractor={m => m.long.value}
+							latitudeExtractor={m => m.lat.value}
+							intensityExtractor={m => parseFloat(m.atitude.value)} 
 						/>
-					)
+					)*/
 				}
 				
 				<TileLayer 
@@ -30,20 +30,36 @@ export default class stationsMap extends Component {
 					url='http://{s}.tile.osm.org/{z}/{x}/{y}.png' 
 				/>
 				{
-					!showHeatMap &&
 					stations.length &&
-					stations.map(({name,latitude,longitude,height}, index)=>{
+					stations.map(({location_name,lat,long,altitude,stat_num}, index)=>{
 						return (
 							<FeatureGroup key={index}>
 								<Popup>
 									<div className="popup__info">
+										<div className="popup__item">
+											<div className="popup__item-key">ID:</div>
+											<div className="popup__item-value">{stat_num.value}</div>
+										</div>
 										<dl className="popup__item">
 											<dt className="popup__item-key">Название:</dt>{' '}
-											<dd className="popup__item-value">{name}</dd>
+											<dd className="popup__item-value">{location_name.value}</dd>
 										</dl>
 										<dl className="popup__item">
-											<dt className="popup__item-key">Высота метеопл:</dt>{' '}
-											<dd className="popup__item-value">{height}</dd>
+											<div className="popup__item-key">Lat:</div>
+											<div className="popup__item-value">{lat.value}</div>
+										</dl>
+										<dl className="popup__item">
+											<div className="popup__item-key">Long:</div>
+											<div className="popup__item-value">{long.value}</div>
+										</dl>
+										<dl className="popup__item">
+											<dt className="popup__item-key">Высота над уровнем моря:</dt>{' '}
+											<dd className="popup__item-value">{altitude.value}</dd>
+										</dl>
+										
+										<dl className="popup__item">
+											<div className="popup__item-key"></div>
+											<div className="popup__item-value"></div>
 										</dl>
 									</div>
 								</Popup>
@@ -51,7 +67,10 @@ export default class stationsMap extends Component {
 									color={"#3498db"}
 									wieght={2}
 									opacity={0.8}
-									center={[latitude,longitude]} 
+									center={[
+										parseFloat(lat.value),
+										parseFloat(long.value)
+									]} 
 									radius={5}
 								/>
 							</FeatureGroup>

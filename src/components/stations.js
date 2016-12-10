@@ -21,7 +21,7 @@ class Stations extends Component {
 		this.onSetActiveDay = this.onSetActiveDay.bind(this);
 	}
 	componentDidMount(){
-		this.props.dispatch(fetchStations(this.props.filter.activeDay));
+		this.props.dispatch(fetchStations(/*this.props.filter.activeDay*/));
 	}
 	onSetActiveDay(e,day,props){
 		if(props.disabled) return;
@@ -46,18 +46,17 @@ class Stations extends Component {
 				<Row>
 					<Col md={3}>
 						<div className="h3 text-center">MOE APP: WEATHER STATIONS</div>
-						<Filter 
+						{/*<Filter 
 							showHeatMap={filter.heatmap}
 							onToggleHeatMap={()=>{dispatch(toggleHeatMap())}}
 							activeDay={filter.activeDay}
 							onSelectDay={this.onSetActiveDay}
 							onSubmitFilter={()=>{dispatch(fetchStations(filter.activeDay))}}
 							loading={loading}
-						/>
-						
+						/>*/}
 					</Col>
 					<Col md={9}>
-						<StationsMap showHeatMap={filter.heatmap} stations={stations} />
+						<StationsMap stations={stations} />
 					</Col>
 				</Row>
 			</Grid>
