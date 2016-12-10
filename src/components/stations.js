@@ -58,11 +58,15 @@ class Stations extends Component {
 						}
 						{
 							stations.length && (
-								activeStation.station && 
-								(
-									<ActiveStation 
-										{...activeStation}
-									/>
+								activeStation.loading ? (
+									<p className="text-center lead">Загрузка данных о стнации...</p>
+								) : (
+									activeStation.station && 
+									(
+										<ActiveStation 
+											{...activeStation}
+										/>
+									)
 								)
 							)
 						}

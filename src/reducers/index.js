@@ -4,8 +4,8 @@ import {filter} from './filter';
 
 const weatherStattionsApp = combineReducers({
 	stationsStore: stationsLoad,
-	activeStation: stationDataLoad,
-	filter
+	activeStation: stationDataLoad
+	/*filter*/
 });
 
 export default weatherStattionsApp
