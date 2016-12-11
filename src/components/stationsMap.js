@@ -2,20 +2,21 @@ import React, { Component, PropTypes } from 'react';
 import {Map,Marker,Popup,TileLayer,CircleMarker,FeatureGroup} from 'react-leaflet';
 import HeatmapLayer from 'react-leaflet-heatmap-layer';
 import {mapConfig} from '../config/consts';
+import {levenshtein} from '../helpers/';
 
 export default class stationsMap extends Component {
 	constructor(props){
 		super(props);
 	}
 	render() {
-		const {stations,onStationClick} = this.props;
+		const {stations,onStationClick, filter} = this.props;
 		return (
 			<Map
 				center={mapConfig.center}
 				zoom={mapConfig.zoom}
 			>
 				{
-					/*showHeatMap && (
+					/*showHeatMap && ( 
 						<HeatmapLayer
 							points={stations}
 							longitudeExtractor={m => m.long.value}
@@ -32,7 +33,7 @@ export default class stationsMap extends Component {
 				{
 					stations.length &&
 					stations.map(({location_name,lat,long,altitude,stat_num}, index)=>{
-						return (
+						return (location_name.value.indexOf(filter.stationName) !== -1) || (levenshtein(location_name.value,filter.stationName) < 3) ? (
 							<FeatureGroup key={index}>
 								<Popup>
 									<div className="popup__info">
@@ -75,7 +76,7 @@ export default class stationsMap extends Component {
 									onClick={()=>onStationClick(stat_num.value,location_name.value)}
 								/>
 							</FeatureGroup>
-						)
+						) : null
 					})
 				}
 			</Map>

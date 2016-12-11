@@ -4,7 +4,6 @@ import './station_table.styl';
 
 export default class ActiveStation extends Component {
 	render() {
-		console.log(this.props);
 		const {loading,station} = this.props;
 		return (
 			<div>

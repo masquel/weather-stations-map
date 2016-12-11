@@ -161,3 +161,11 @@ export const toggleHeatMap = () => {
 		type: ACTIONS.TOGGLE_HEATMAP
 	}
 }
+
+export const setFilterStationName = (name) => {
+	return {
+		type: ACTIONS.SET_FILTER_STATION_NAME,
+		name
+	}
+
+}

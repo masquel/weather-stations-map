@@ -7,7 +7,7 @@ import 'normalize.css';
 import 'leaflet/dist/leaflet.css';
 import './map.styl';
 
-import {fetchStations,fetchStation,setActiveMonth,toggleHeatMap} from '../actions/';
+import {fetchStations,fetchStation,setActiveMonth,toggleHeatMap,setFilterStationName} from '../actions/';
 
 
 import ActiveStation from './activeStation';
@@ -18,6 +18,7 @@ class Stations extends Component {
 	constructor(props){
 		super(props);
 		this.onSetActiveMonth = this.onSetActiveMonth.bind(this);
+		this.onSetStationName = this.onSetStationName.bind(this);
 	}
 	componentDidMount(){
 		this.props.dispatch(fetchStations(/*this.props.filter.activeDay*/));
@@ -27,6 +28,9 @@ class Stations extends Component {
 		if(filter.activeMonth.month === date.month && filter.activeMonth.year === date.year) return;
 		dispatch(setActiveMonth(date));
 		activeStation.station.id && dispatch(fetchStation(activeStation.station.id,activeStation.station.name,date));
+	}
+	onSetStationName(e){
+		this.props.dispatch(setFilterStationName(e.target.value));
 	}
 	render(){
 		const {
@@ -47,7 +51,9 @@ class Stations extends Component {
 							showHeatMap={filter.heatmap}
 							onToggleHeatMap={()=>{dispatch(toggleHeatMap())}}
 							activeMonth={filter.activeMonth}
+							stationName={filter.stationName}
 							onSelectMonth={this.onSetActiveMonth}
+							onStationNameEnter={this.onSetStationName}
 						/>
 						{
 							stationsStore.loading && (<p className="text-center lead">Загрузка станций...</p>)
@@ -67,6 +73,7 @@ class Stations extends Component {
 					<Col md={6} lg={8}>
 						<StationsMap
 							stations={stations}
+							filter={filter}
 							onStationClick={(id, name)=>{dispatch(fetchStation(id, name, filter.activeMonth))}}
 						/>
 					</Col>

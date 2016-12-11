@@ -24,11 +24,20 @@ export default class Filter extends Component {
 	render() {
 		const {
 			onSelectMonth,
+			onStationNameEnter,
+			stationName,
 			activeMonth,
 			loading
 		} = this.props;
 		return (
 			<div>
+				<FormGroup>
+					<ControlLabel><strong>Название станции (нечеткий поиск)</strong></ControlLabel>
+					<FormControl
+						value={stationName}
+						onChange={onStationNameEnter}
+					/>
+				</FormGroup>
 				<Picker
 					ref="monthPicker"
 					value={activeMonth}
