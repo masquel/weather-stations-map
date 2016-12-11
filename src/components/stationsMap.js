@@ -33,7 +33,9 @@ export default class stationsMap extends Component {
 				{
 					stations.length &&
 					stations.map(({location_name,lat,long,altitude,stat_num}, index)=>{
-						return (location_name.value.indexOf(filter.stationName) !== -1) || (levenshtein(location_name.value,filter.stationName) < 3) ? (
+						const stationNameLowerCase = location_name.value.toLowerCase();
+						const filterStationNameLowerCase = filter.stationName.toLowerCase();
+						return (stationNameLowerCase.indexOf(filterStationNameLowerCase) !== -1) || (levenshtein(stationNameLowerCase,filterStationNameLowerCase) < 3) ? (
 							<FeatureGroup key={index}>
 								<Popup>
 									<div className="popup__info">
