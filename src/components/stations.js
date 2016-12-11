@@ -26,7 +26,7 @@ class Stations extends Component {
 		const {dispatch, activeStation, filter} = this.props;
 		if(filter.activeMonth.month === date.month && filter.activeMonth.year === date.year) return;
 		dispatch(setActiveMonth(date));
-		activeStation.station.id && dispatch(fetchStation(activeStation.station.id,activeStation.station.name,filter.activeMonth));
+		activeStation.station.id && dispatch(fetchStation(activeStation.station.id,activeStation.station.name,date));
 	}
 	render(){
 		const {

@@ -38,8 +38,8 @@ export default class Filter extends Component {
 				>
 					<FormGroup>
 						<ControlLabel><strong>Выберите дату:</strong></ControlLabel>
-						<InputGroup>
-							<div className="form-control" onClick={()=>this.refs.monthPicker.show()}>
+						<InputGroup onClick={()=>this.refs.monthPicker.show()} style={{cursor:"pointer"}}>
+							<div className="form-control">
 								<span>{makeText(activeMonth)}</span>
 							</div>	
 							<InputGroup.Addon>
