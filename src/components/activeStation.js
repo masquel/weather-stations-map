@@ -21,19 +21,21 @@ export default class ActiveStation extends Component {
 												<thead>
 													<tr>
 														<th><strong>Дата</strong></th>
-														<th><strong>Мин. t</strong></th>
-														<th><strong>Макс. t</strong></th>
-														<th><strong>Ср. t</strong></th>
+														<th><strong>t мин.</strong></th>
+														<th><strong>t макс.</strong></th>
+														<th><strong>t ср.</strong></th>
+														<th><strong>Осадки</strong></th>
 													</tr>
 												</thead>
 												<tbody>
 													{
-														station.data.map(({date,tmin,tmax,tmean},index)=>(
+														station.data.map(({date,tmin,tmax,tmean,precipitation},index)=>(
 															<tr key={index}>
 																<td>{date.value}</td>
-																<td>{tmin.value}</td>
-																<td>{tmax.value}</td>
-																<td>{tmean.value}</td>
+																<td>{tmin.value} <sup>o</sup>C</td>
+																<td>{tmax.value} <sup>o</sup>C</td>
+																<td>{tmean.value} <sup>o</sup>C</td>
+																<td>{precipitation.value} мм</td>
 															</tr>
 														))
 													}
