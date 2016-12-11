@@ -5,6 +5,7 @@ export const ACTIONS = {
 	"LOAD_STATIONS_ERROR": "LOAD_STATIONS_ERROR",
 	"SET_STATIONS": "SET_STATIONS",
 	"SET_ACTIVE_DAY": "SET_ACTIVE_DAY",
+	"SET_ACTIVE_MONTH": "SET_ACTIVE_MONTH",
 	"LOAD_STATION": "LOAD_STATION",
 	"SET_STATION": "SET_STATION",
 	"TOGGLE_HEATMAP": "TOGGLE_HEATMAP"
@@ -21,12 +22,4 @@ export const mapConfig = {
 	legends: true,
 	infoControl: false,
 	attributionControl: true
-};
-
-export const tileLayerConfig = {
-	uri: 'http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
-	params: {
-		minZoom: 3,
-		accessToken: 'pk.eyJ1IjoibWFzcSIsImEiOiJjaXdkeThzNjcwMDVmMm9rZm42MHN3bDdtIn0.i3TgNuzFBR0QhqPDewtUQA'
-	}
 };

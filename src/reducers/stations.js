@@ -24,7 +24,8 @@ export const stationDataLoad = (state = {station:{},loading:false}, {type,loadin
 	switch(type){
 		case ACTIONS.LOAD_STATION: {
 			return {
-				loading
+				loading,
+				station
 			}
 		}
 		case ACTIONS.SET_STATION: {

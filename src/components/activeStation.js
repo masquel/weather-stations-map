@@ -9,7 +9,14 @@ export default class ActiveStation extends Component {
 		return (
 			<div>
 				{
-					
+					loading ? (
+						station && station.name ? (
+							<div>
+								<div className="h3 text-center">Выбранная станция: <strong>{station.name}</strong></div>
+								<p className="text-center lead">Загрузка данных о станции...</p>
+							</div>
+						) : null
+					) : (
 						station && station.name ? (
 							<div>
 								<div className="h3 text-center">Выбранная станция: <strong>{station.name}</strong></div>
@@ -43,13 +50,14 @@ export default class ActiveStation extends Component {
 											</table>
 										</div>
 									) : (
-										<p className="text-center lead">Данных о станции нет.</p>
+										<p className="text-center lead">Данных о станции нет. Попробуйте выбрать другой месяц.</p>
 									)
 								}
 							</div>
 						) : (
 							<p className="lead text-center">Выберите метеостанцию на карте для отображения информации</p>
 						)
+					)	
 				}
 			</div>
 			
