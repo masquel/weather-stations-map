@@ -41,7 +41,7 @@ class Stations extends Component {
 		return (
 			<Grid fluid>
 				<Row>
-					<Col md={3}>
+					<Col md={6} lg={4}>
 						<div className="h3 text-center">MOE APP: WEATHER STATIONS</div>
 						<Filter
 							showHeatMap={filter.heatmap}
@@ -64,7 +64,7 @@ class Stations extends Component {
 						}
 
 					</Col>
-					<Col md={9}>
+					<Col md={6} lg={8}>
 						<StationsMap
 							stations={stations}
 							onStationClick={(id, name)=>{dispatch(fetchStation(id, name, filter.activeMonth))}}
