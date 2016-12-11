@@ -16,7 +16,7 @@ export const filter = (state = defaultState, {type, month, name}) => {
 			return {
 				activeMonth: month,
 				heatmap: state.heatmap,
-				stationName: state.stattionName
+				stationName: state.stationName
 			}
 		}
 		case ACTIONS.SET_FILTER_STATION_NAME: {
@@ -30,7 +30,7 @@ export const filter = (state = defaultState, {type, month, name}) => {
 			return {
 				activeMonth: state.activeMonth,
 				heatmap: !state.heatmap,
-				stationName: state.stattionName
+				stationName: state.stationName
 			}
 		}
 		default: return state
