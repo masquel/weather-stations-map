@@ -28,7 +28,7 @@ class Stations extends Component {
 			this.props.dispatch(setActiveDay(null));
 		}else{
 			this.props.dispatch(setActiveDay(day));
-		}	
+		}
 	}
 	render(){
 		const {
@@ -45,7 +45,7 @@ class Stations extends Component {
 				<Row>
 					<Col md={3}>
 						<div className="h3 text-center">MOE APP: WEATHER STATIONS</div>
-						{/*<Filter 
+						{/*<Filter
 							showHeatMap={filter.heatmap}
 							onToggleHeatMap={()=>{dispatch(toggleHeatMap())}}
 							activeDay={filter.activeDay}
@@ -54,27 +54,27 @@ class Stations extends Component {
 							loading={loading}
 						/>*/}
 						{
-							stationsStore.loading && (<p className="text-center lead">Загрузка станций...</p>) 
+							stationsStore.loading && (<p className="text-center lead">Загрузка станций...</p>)
 						}
 						{
 							stations.length ? (
 								activeStation.loading ? (
-									<p className="text-center lead">Загрузка данных о стнации...</p>
+									<p className="text-center lead">Загрузка данных о станции...</p>
 								) : (
-									activeStation.station ? 
+									activeStation.station ?
 									(
-										<ActiveStation 
+										<ActiveStation
 											{...activeStation}
 										/>
 									) : null
 								)
 							) : null
 						}
-						
+
 					</Col>
 					<Col md={9}>
-						<StationsMap 
-							stations={stations} 
+						<StationsMap
+							stations={stations}
 							onStationClick={(id, name)=>{dispatch(fetchStation(id, name))}}
 						/>
 					</Col>
