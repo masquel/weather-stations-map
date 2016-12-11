@@ -1,4 +1,4 @@
-export const API_KEY = "95ef9613886f1d03fd7bb2d69328f118";
+export const API_URL = "http://saturn.alexzer.ru/meteo";
 
 export const ACTIONS = {
 	"LOAD_STATIONS": "LOAD_STATIONS",
