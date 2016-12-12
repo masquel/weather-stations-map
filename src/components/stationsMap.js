@@ -16,19 +16,19 @@ export default class stationsMap extends Component {
 				zoom={mapConfig.zoom}
 			>
 				{
-					/*showHeatMap && ( 
+					/*showHeatMap && (
 						<HeatmapLayer
 							points={stations}
 							longitudeExtractor={m => m.long.value}
 							latitudeExtractor={m => m.lat.value}
-							intensityExtractor={m => parseFloat(m.atitude.value)} 
+							intensityExtractor={m => parseFloat(m.atitude.value)}
 						/>
 					)*/
 				}
-				
-				<TileLayer 
+
+				<TileLayer
 					//attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-					url='http://{s}.tile.osm.org/{z}/{x}/{y}.png' 
+					url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
 				/>
 				{
 					stations.length &&
@@ -48,32 +48,32 @@ export default class stationsMap extends Component {
 											<dd className="popup__item-value">{location_name.value}</dd>
 										</dl>
 										<dl className="popup__item">
-											<div className="popup__item-key">Lat:</div>
+											<div className="popup__item-key">Широта:</div>
 											<div className="popup__item-value">{lat.value}</div>
 										</dl>
 										<dl className="popup__item">
-											<div className="popup__item-key">Long:</div>
+											<div className="popup__item-key">Долгота:</div>
 											<div className="popup__item-value">{long.value}</div>
 										</dl>
 										<dl className="popup__item">
 											<dt className="popup__item-key">Высота над уровнем моря:</dt>{' '}
 											<dd className="popup__item-value">{altitude.value}</dd>
 										</dl>
-										
+
 										<dl className="popup__item">
 											<div className="popup__item-key"></div>
 											<div className="popup__item-value"></div>
 										</dl>
 									</div>
 								</Popup>
-								<CircleMarker 
+								<CircleMarker
 									color={"#3498db"}
 									wieght={2}
 									opacity={0.8}
 									center={[
 										parseFloat(lat.value),
 										parseFloat(long.value)
-									]} 
+									]}
 									radius={5}
 									onClick={()=>onStationClick(stat_num.value,location_name.value)}
 								/>

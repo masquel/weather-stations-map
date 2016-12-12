@@ -9,15 +9,9 @@
 @prefix mtr: <http://example.org/meteo_ru_data/resource/> .
 
 mto:w_measure   rdf:type   rdfs:Class .
-mto:w_st_loc   rdf:type   rdfs:Class .
-mto:w_st   rdf:type   rdfs:Class .
-
-mto:w_st   rdfs:subClassOf   dbo:Location .
-mto:w_st_loc   rdfs:subClassOf   dbo:Location .
 
 mto:st_measure  rdf:type  rdf:Property .
 mto:st_measure   rdfs:domain  mto:w_measure .
-mto:st_measure   rdfs:range  mto:w_st .
 
 mto:datem  rdf:type  rdf:Property .
 mto:datem   rdfs:domain  mto:w_measure .
@@ -53,8 +47,3 @@ mto:qr  rdfs:domain  mto:w_measure .
 mto:cr  rdf:type  rdf:Property .
 mto:cr  rdfs:domain  mto:w_measure .
 
-mto:st_alt  rdf:type  rdf:Property .
-mto:st_alt  rdfs:domain  mto:w_st .
-
-mto:st_num  rdf:type  rdf:Property .
-mto:st_num  rdfs:domain  mto:w_st .
