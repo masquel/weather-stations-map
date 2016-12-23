@@ -82,7 +82,7 @@ export default class stationsMap extends Component {
 												const stationLastMeasurement = moment(datemax.value, 'YYYY-MM-DD');
 												lastMeasurementDate = {
 													year: stationLastMeasurement.year(),
-													month: stationLastMeasurement.month()
+													month: stationLastMeasurement.month()+1
 												}
 											}
 											onStationClick(stat_num.value,location_name.value,lastMeasurementDate)
