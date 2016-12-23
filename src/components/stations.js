@@ -74,7 +74,7 @@ class Stations extends Component {
 						<StationsMap
 							stations={stations}
 							filter={filter}
-							onStationClick={(id, name)=>{dispatch(fetchStation(id, name, filter.activeMonth))}}
+							onStationClick={(id, name, lastMeasurementDate)=>{dispatch(fetchStation(id, name, lastMeasurementDate))}}
 						/>
 					</Col>
 				</Row>
