@@ -41,8 +41,8 @@ export const fetchStations = () => {
 		PREFIX mto: <http://example.org/meteo_ru_data/ontology/>
 		PREFIX mtr: <http://example.org/meteo_ru_data/resource/>
 		SELECT ?station ?label ?stat_num ?location_name ?lat ?long ?altitude
-		WHERE 
-		{ 
+		WHERE
+		{
 			?station a mto:w_st ;
 			rdfs:label ?label;
 			mto:st_num ?stat_num ;
@@ -54,7 +54,7 @@ export const fetchStations = () => {
 			rdfs:label ?location_name.
 		}
 	*/
-	const query = `PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0A%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0A%0APREFIX+dbr%3A+%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2F%3E%0A%0APREFIX+dbo%3A+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2F%3E%0A%0APREFIX+xsd%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%0A%0APREFIX+geo%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2003%2F01%2Fgeo%2Fwgs84_pos%23%3E%0A%0APREFIX+mt%3A+%3Chttp%3A%2F%2Fexample.org%2Fmeteo_ru_data%2F%3E%0A%0APREFIX+mto%3A+%3Chttp%3A%2F%2Fexample.org%2Fmeteo_ru_data%2Fontology%2F%3E%0A%0APREFIX+mtr%3A+%3Chttp%3A%2F%2Fexample.org%2Fmeteo_ru_data%2Fresource%2F%3E%0A%0ASELECT+%3Fstation+%3Flabel+%3Fstat_num+%3Flocation_name+%3Flat+%3Flong+%3Faltitude%0A%0AWHERE+%0A%0A%7B+%0A%0A%3Fstation+a+mto%3Aw_st+%3B%0A%0Ardfs%3Alabel+%3Flabel%3B%0A%0Amto%3Ast_num+%3Fstat_num+%3B%0A%0Ageo%3Alat+%3Flat%3B%0A%0Ageo%3Along+%3Flong%3B%0A%0Adbo%3Alocation+%3Flocation%3B%0A%0Amto%3Ast_alt+%3Faltitude.%0A%0A%3Flocation+a+mto%3Aw_st_loc%3B%0A%0Ardfs%3Alabel+%3Flocation_name.%0A%0A%7D`;
+	const query = `PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0A%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0A%0APREFIX+dbr%3A+%3Chttp%3A%2F%2Fdbpedia.org%2Fresource%2F%3E%0A%0APREFIX+dbo%3A+%3Chttp%3A%2F%2Fdbpedia.org%2Fontology%2F%3E%0A%0APREFIX+xsd%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema%23%3E%0A%0APREFIX+geo%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2003%2F01%2Fgeo%2Fwgs84_pos%23%3E%0A%0APREFIX+mt%3A+%3Chttp%3A%2F%2Fexample.org%2Fmeteo_ru_data%2F%3E%0A%0APREFIX+mto%3A+%3Chttp%3A%2F%2Fexample.org%2Fmeteo_ru_data%2Fontology%2F%3E%0A%0APREFIX+mtr%3A+%3Chttp%3A%2F%2Fexample.org%2Fmeteo_ru_data%2Fresource%2F%3E%0A%0APREFIX+schema%3A+%3Chttp%3A%2F%2Fschema.org%2F%3E+%0A%0APREFIX+ispra%3A+%3Chttp%3A%2F%2Fdati.isprambiente.it%2Fontology%2Fcore%23%3E+%0A%0APREFIX+dcterms%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E+%0A%0A%0A%0ASELECT+%3Fstation+%3Flabel+%3Fstat_num+%3Flocation_name+%3Flat+%3Flong+%3Faltitude%0A%0AWHERE+%0A%0A%7B+%0A%0A%3Fstation+a+ispra%3AMeasureStation+%3B%0A%0Ardfs%3Alabel+%3Flabel%3B%0A%0Adcterms%3Aidentifier+%3Fstat_num+%3B%0A%0Aschema%3Alocation+%3Flocation.%0A%0A%0A%0A%0A%0A%23+FILTER+(%3Flat%3E66.562)+%23%D0%B5%D1%81%D0%BB%D0%B8+%D1%85%D0%BE%D1%87%D0%B5%D1%88%D1%8C+%D0%BE%D1%82%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%0A%0A%3Flocation+a+schema%3APlace%3B%0A%0Ardfs%3Alabel+%3Flocation_name%3B%0A%0Aschema%3Ageo+%5B%0A%0Aa+schema%3AGeoCoordinates+%3B%0A%0Aschema%3Alatitude+%3Flat+%3B%0A%0Aschema%3Alongitude+%3Flong+%3B%0A%0Ageo%3Aalt+%3Faltitude+%3B%0A%0A%5D+.%0A%0A%7D`;
 	return dispatch => {
 		dispatch(loadStations())
 		return axios
@@ -99,38 +99,38 @@ const setStation = (station) => {
 
 export const fetchStation = (id,name,{year, month}) => {
 	/*
-		PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-		PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-		PREFIX dbr: <http://dbpedia.org/resource/> 
-		PREFIX dbo: <http://dbpedia.org/ontology/> 
-		PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
-		PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> 
-		PREFIX mt: <http://example.org/meteo_ru_data/> 
-		PREFIX mto: <http://example.org/meteo_ru_data/ontology/> 
-		PREFIX mtr: <http://example.org/meteo_ru_data/resource/> 
-		SELECT ?measure ?date ?stat_num ?precipitation ?cr_flag ?qr_flag ?tflag ?tmax ?qtmax_flag ?tmean ?qtmean_flag ?tmin ?qtmin 
-		WHERE 
-		{ 
-			?measure a mto:w_measure; 
-			mto:datem ?date; 
-			mto:st_measure ?station; 
-			mto:precip ?precipitation; 
-			mto:cr ?cr_flag; 
-			mto:qr ?qr_flag; 
-			mto:tflag ?tflag; 
-			mto:tmax ?tmax; 
-			mto:qtmax ?qtmax_flag; 
-			mto:tmean ?tmean; 
-			mto:qtmean ?qtmean_flag; 
-			mto:tmin ?tmin; 
-			mto:qtmin ?qtmin_flag. 
-			?station a mto:w_st ; 
-			mto:st_num 21931. 
-			BIND(year(xsd:date(?date)) as ?date_year). 
-			BIND(month(xsd:date(?date)) as ?date_month). 
-			FILTER (?date_year=2015 && ?date_month=2) 
-		} 
-		ORDER BY DESC(?date) 
+		PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+		PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+		PREFIX dbr: <http://dbpedia.org/resource/>
+		PREFIX dbo: <http://dbpedia.org/ontology/>
+		PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+		PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+		PREFIX mt: <http://example.org/meteo_ru_data/>
+		PREFIX mto: <http://example.org/meteo_ru_data/ontology/>
+		PREFIX mtr: <http://example.org/meteo_ru_data/resource/>
+		SELECT ?measure ?date ?stat_num ?precipitation ?cr_flag ?qr_flag ?tflag ?tmax ?qtmax_flag ?tmean ?qtmean_flag ?tmin ?qtmin
+		WHERE
+		{
+			?measure a mto:w_measure;
+			mto:datem ?date;
+			mto:st_measure ?station;
+			mto:precip ?precipitation;
+			mto:cr ?cr_flag;
+			mto:qr ?qr_flag;
+			mto:tflag ?tflag;
+			mto:tmax ?tmax;
+			mto:qtmax ?qtmax_flag;
+			mto:tmean ?tmean;
+			mto:qtmean ?qtmean_flag;
+			mto:tmin ?tmin;
+			mto:qtmin ?qtmin_flag.
+			?station a mto:w_st ;
+			mto:st_num 21931.
+			BIND(year(xsd:date(?date)) as ?date_year).
+			BIND(month(xsd:date(?date)) as ?date_month).
+			FILTER (?date_year=2015 && ?date_month=2)
+		}
+		ORDER BY DESC(?date)
 		LIMIT 31
 	*/
 	console.log(year,month);
