@@ -34,7 +34,7 @@ class Stations extends Component {
 	onStationClick(id, name, datemax){
 		const {dispatch, filter} = this.props;
 		dispatch(fetchCityInfo(id,name));
-		
+
 		let lastMeasurementDate = filter.activeMonth;
 		if(datemax){
 			const stationLastMeasurement = moment(datemax.value, 'YYYY-MM-DD');
@@ -56,10 +56,10 @@ class Stations extends Component {
 			stationsStore,
 			filter,
 			activeStation,
-			cities
 		} = this.props;
 		const {
-			stations
+			stations,
+			loadingCity
 		} = stationsStore;
 		return (
 			<Grid fluid>
@@ -94,6 +94,7 @@ class Stations extends Component {
 							stations={stations}
 							filter={filter}
 							onStationClick={this.onStationClick}
+							loadingCity={loadingCity}
 						/>
 					</Col>
 				</Row>

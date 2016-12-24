@@ -10,7 +10,13 @@ export default class stationsMap extends Component {
 		super(props);
 	}
 	render() {
-		const {stations,onStationClick, filter, cities} = this.props;
+		const {
+			stations,
+			onStationClick,
+			filter,
+			cities,
+			loadingCity
+		} = this.props;
 		return (
 			<Map
 				center={mapConfig.center}
@@ -55,13 +61,17 @@ export default class stationsMap extends Component {
 									<Popup>
 										<div className="popup__info">
 											{
-												(city_img || city_population) ?
+												loadingCity ? (
+													<div>
+														<p className="lead text-center">Загрузка дополнительной информации</p>
+													</div>
+												) :	(city_img || city_population) ?
 													(
 														<div>
 															{
 																city_img ? (
 																	<div className="popup__item">
-																		<img src={city_img.value} alt={location_name.value} className="img-responsive"/>
+																		<img src={city_img.value} alt={location_name.value} className="img-responsive center-block"/>
 																	</div>
 																) : null
 															}

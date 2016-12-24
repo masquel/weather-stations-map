@@ -1,6 +1,6 @@
 import {ACTIONS} from '../config/consts';
 
-export const stationsLoad = (state = {loading: true, stations: []}, {type,loading,stations, city}) => {
+export const stationsLoad = (state = {loading: true, stations: []}, {type,loading,stations,loadingCity,city}) => {
 	switch(type){
 		case ACTIONS.LOAD_STATIONS: {
 			return {
@@ -15,9 +15,16 @@ export const stationsLoad = (state = {loading: true, stations: []}, {type,loadin
 				stations
 			}
 		}
+		case ACTIONS.LOAD_CITY_INFO: {
+			return {
+				...state,
+				loadingCity
+			}
+		}
 		case ACTIONS.SET_CITY_INFO: {
 			const {city_img,city_population,city_link} = city.data;
 			return {
+				...state,
 				stations: state.stations.map(
 					station => (
 						station.stat_num.value == city.id ? 
@@ -29,7 +36,8 @@ export const stationsLoad = (state = {loading: true, stations: []}, {type,loadin
 						} 
 						: station
 					)
-				)
+				),
+				loadingCity
 			}
 		}
 		default:
