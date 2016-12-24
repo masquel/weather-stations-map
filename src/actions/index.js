@@ -172,3 +172,32 @@ export const setFilterStationName = (name) => {
 	}
 
 }
+
+const loadCityData = (id,city) => {
+	return {
+		type: ACTIONS.LOAD_CITY_DATA,
+		loadingCity: true
+	}
+}
+
+const addCityInfo = (city) => {
+	return {
+		type: ACTIONS.SET_CITY_INFO,
+		loadingCity: false,
+		city
+	}
+}
+
+export const fetchCityInfo = (id,name) => {
+	// Федеративный запрос
+	const query = '';
+	return dispatch => {
+		dispatch(loadCityData(id,name));
+		return axios
+			.get(`${API_URL}/?query=${query}`,queryConfig)
+			.then(response=>{
+				console.log(response.data)
+				dispatch(addCityInfo({id,name, data: response.data.results.bindings}))
+			})
+	}
+};

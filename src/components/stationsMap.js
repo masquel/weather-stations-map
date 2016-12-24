@@ -10,7 +10,7 @@ export default class stationsMap extends Component {
 		super(props);
 	}
 	render() {
-		const {stations,onStationClick, filter} = this.props;
+		const {stations,onStationClick, filter, cities} = this.props;
 		return (
 			<Map
 				center={mapConfig.center}
@@ -33,65 +33,98 @@ export default class stationsMap extends Component {
 				/>
 				{
 					stations.length &&
-					stations.map(({location_name,lat,long,altitude,stat_num,datemax}, index)=>{
-						const stationNameLowerCase = location_name.value.toLowerCase();
-						const filterStationNameLowerCase = filter.stationName.toLowerCase();
-						return (stationNameLowerCase.indexOf(filterStationNameLowerCase) !== -1) || (levenshtein(stationNameLowerCase,filterStationNameLowerCase) < 3) ? (
-							<FeatureGroup key={index}>
-								<Popup>
-									<div className="popup__info">
-										<div className="popup__item">
-											<div className="popup__item-key">ID:</div>{' '}
-											<div className="popup__item-value">{stat_num.value}</div>
-										</div>
-										<dl className="popup__item">
-											<dt className="popup__item-key">Название:</dt>{' '}
-											<dd className="popup__item-value">{location_name.value}</dd>
-										</dl>
-										<dl className="popup__item">
-											<div className="popup__item-key">Широта:</div>{' '}
-											<div className="popup__item-value">{lat.value}</div>
-										</dl>
-										<dl className="popup__item">
-											<div className="popup__item-key">Долгота:</div>{' '}
-											<div className="popup__item-value">{long.value}</div>
-										</dl>
-										<dl className="popup__item">
-											<dt className="popup__item-key">Высота над уровнем моря:</dt>{' '}
-											<dd className="popup__item-value">{altitude && altitude.value}</dd>
-										</dl>
-										<dl className="popup__item">
-											<div className="popup__item-key">Последние измерения:</div>{' '}
-											<div className="popup__item-value">{datemax ? datemax.value : "отсутствуют"}</div>
-										</dl>
-									</div>
-								</Popup>
-								<CircleMarker
-									color={"#3498db"}
-									wieght={2}
-									opacity={0.8}
-									center={[
-										parseFloat(lat.value),
-										parseFloat(long.value)
-									]}
-									radius={5}
-									onClick={
-										()=>{
-											let lastMeasurementDate = filter.activeMonth;
-											if(datemax){
-												const stationLastMeasurement = moment(datemax.value, 'YYYY-MM-DD');
-												lastMeasurementDate = {
-													year: stationLastMeasurement.year(),
-													month: stationLastMeasurement.month()+1
-												}
+					stations.map(
+						(
+							{
+								location_name,
+								lat,
+								long,
+								altitude,
+								stat_num,
+								datemax,
+								city_img,
+								city_population,
+								city_link
+							}, 
+							index
+						)=>{
+							const stationNameLowerCase = location_name.value.toLowerCase();
+							const filterStationNameLowerCase = filter.stationName.toLowerCase();
+							return (stationNameLowerCase.indexOf(filterStationNameLowerCase) !== -1) || (levenshtein(stationNameLowerCase,filterStationNameLowerCase) < 3) ? (
+								<FeatureGroup key={index}>
+									<Popup>
+										<div className="popup__info">
+											{
+												(city_img || city_population) ?
+													(
+														<div>
+															{
+																city_img ? (
+																	<div className="popup__item">
+																		<img src={city_img.value} alt={location_name.value} className="img-responsive"/>
+																	</div>
+																) : null
+															}
+															{
+																city_population ? (
+																	<div className="popup__item">
+																		<div className="popup__item-key">Население:</div>{' '}
+																		<div className="popup__item-value">{city_population.value}</div>
+																	</div>
+																) : null
+															}
+															
+															<hr/>
+														</div>
+													) : null
 											}
-											onStationClick(stat_num.value,location_name.value,lastMeasurementDate)
+											<div className="popup__item">
+												<div className="popup__item-key">ID:</div>{' '}
+												<div className="popup__item-value">{stat_num.value}</div>
+											</div>
+											<dl className="popup__item">
+												<dt className="popup__item-key">Название:</dt>{' '}
+												<dd className="popup__item-value">
+													{city_link ? <a href={city_link.value} target="_blank">location_name.value</a> : location_name.value}
+												</dd>
+											</dl>
+											<dl className="popup__item">
+												<div className="popup__item-key">Широта:</div>{' '}
+												<div className="popup__item-value">{lat.value}</div>
+											</dl>
+											<dl className="popup__item">
+												<div className="popup__item-key">Долгота:</div>{' '}
+												<div className="popup__item-value">{long.value}</div>
+											</dl>
+											<dl className="popup__item">
+												<dt className="popup__item-key">Высота над уровнем моря:</dt>{' '}
+												<dd className="popup__item-value">{altitude && altitude.value}</dd>
+											</dl>
+											<dl className="popup__item">
+												<div className="popup__item-key">Последние измерения:</div>{' '}
+												<div className="popup__item-value">{datemax ? datemax.value : "отсутствуют"}</div>
+											</dl>
+										</div>
+									</Popup>
+									<CircleMarker
+										color={"#3498db"}
+										wieght={2}
+										opacity={0.8}
+										center={[
+											parseFloat(lat.value),
+											parseFloat(long.value)
+										]}
+										radius={5}
+										onClick={
+											()=>{
+												onStationClick(stat_num.value,location_name.value,datemax)
+											}
 										}
-									}
-								/>
-							</FeatureGroup>
-						) : null
-					})
+									/>
+								</FeatureGroup>
+							) : null
+						}
+					)
 				}
 			</Map>
 		)

@@ -7,8 +7,9 @@ import 'normalize.css';
 import 'leaflet/dist/leaflet.css';
 import './map.styl';
 
-import {fetchStations,fetchStation,setActiveMonth,toggleHeatMap,setFilterStationName} from '../actions/';
+import {fetchStations,fetchStation,setActiveMonth,toggleHeatMap,setFilterStationName,fetchCityInfo} from '../actions/';
 
+import moment from 'moment';
 
 import ActiveStation from './activeStation';
 import Filter from './filter';
@@ -19,6 +20,7 @@ class Stations extends Component {
 		super(props);
 		this.onSetActiveMonth = this.onSetActiveMonth.bind(this);
 		this.onSetStationName = this.onSetStationName.bind(this);
+		this.onStationClick = this.onStationClick.bind(this);
 	}
 	componentDidMount(){
 		this.props.dispatch(fetchStations(/*this.props.filter.activeDay*/));
@@ -29,6 +31,22 @@ class Stations extends Component {
 		dispatch(setActiveMonth(date));
 		activeStation.station.id && dispatch(fetchStation(activeStation.station.id,activeStation.station.name,date));
 	}
+	onStationClick(id, name, datemax){
+		const {dispatch, filter} = this.props;
+		dispatch(fetchCityInfo(id,name));
+		
+		let lastMeasurementDate = filter.activeMonth;
+		if(datemax){
+			const stationLastMeasurement = moment(datemax.value, 'YYYY-MM-DD');
+			lastMeasurementDate = {
+				year: stationLastMeasurement.year(),
+				month: stationLastMeasurement.month()+1
+			}
+		}
+		
+		dispatch(fetchStation(id, name, lastMeasurementDate));
+
+	}
 	onSetStationName(e){
 		this.props.dispatch(setFilterStationName(e.target.value));
 	}
@@ -37,7 +55,8 @@ class Stations extends Component {
 			dispatch,
 			stationsStore,
 			filter,
-			activeStation
+			activeStation,
+			cities
 		} = this.props;
 		const {
 			stations
@@ -74,7 +93,7 @@ class Stations extends Component {
 						<StationsMap
 							stations={stations}
 							filter={filter}
-							onStationClick={(id, name, lastMeasurementDate)=>{dispatch(fetchStation(id, name, lastMeasurementDate))}}
+							onStationClick={this.onStationClick}
 						/>
 					</Col>
 				</Row>

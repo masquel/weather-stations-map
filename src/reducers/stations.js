@@ -1,17 +1,34 @@
 import {ACTIONS} from '../config/consts';
 
-export const stationsLoad = (state = {loading: true, stations: []}, {type,loading,stations}) => {
+export const stationsLoad = (state = {loading: true, stations: []}, {type,loading,stations, city}) => {
 	switch(type){
 		case ACTIONS.LOAD_STATIONS: {
 			return {
-				stations: [],
+				...state,
 				loading
 			}
 		}
 		case ACTIONS.SET_STATIONS:{
 			return {
-				stations,
-				loading
+				...state,
+				loading,
+				stations
+			}
+		}
+		case ACTIONS.SET_CITY_INFO: {
+			return {
+				stations: state.stations.map(
+					station => (
+						station.stat_num.value == city.id ? 
+						{
+							...station,
+							city_img: city.city_img,
+							city_population: city.city_population,
+							city_link: city.city_link
+						} 
+						: station
+					)
+				)
 			}
 		}
 		default:
