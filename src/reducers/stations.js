@@ -21,6 +21,12 @@ export const stationsLoad = (state = {loading: true, stations: []}, {type,loadin
 				loadingCity
 			}
 		}
+		case ACTIONS.NO_CITY_INFO:{
+			return {
+				...state,
+				loadingCity
+			}
+		}
 		case ACTIONS.SET_CITY_INFO: {
 			const {city_img,city_population,city_link} = city.data;
 			return {

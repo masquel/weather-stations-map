@@ -180,6 +180,13 @@ const loadCityData = (id,city) => {
 	}
 }
 
+const removeLoadingCityDataState = () => {
+	return {
+		type: ACTIONS.NO_CITY_INFO,
+		loadingCity: false
+	}
+}
+
 const addCityInfo = (city) => {
 	console.log(city);
 	return {
@@ -231,7 +238,11 @@ export const fetchCityInfo = (id,name) => {
 			.then(response=>{
 				const cityData = response.data.results.bindings[0];
 				console.log(cityData);
-				if(typeof cityData !== 'undefined') dispatch(addCityInfo({id,name, data: cityData }));
+				if(typeof cityData !== 'undefined'){
+					dispatch(addCityInfo({id,name, data: cityData }));
+				}else{
+					dispatch(removeLoadingCityDataState());
+				}
 			})
 	}
 };
