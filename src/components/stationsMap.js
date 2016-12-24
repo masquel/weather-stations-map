@@ -85,7 +85,7 @@ export default class stationsMap extends Component {
 											<dl className="popup__item">
 												<dt className="popup__item-key">Название:</dt>{' '}
 												<dd className="popup__item-value">
-													{city_link ? <a href={city_link.value} target="_blank">location_name.value</a> : location_name.value}
+													{city_link ? <a href={city_link.value} target="_blank">{location_name.value}</a> : location_name.value}
 												</dd>
 											</dl>
 											<dl className="popup__item">

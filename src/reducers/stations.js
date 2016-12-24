@@ -16,15 +16,16 @@ export const stationsLoad = (state = {loading: true, stations: []}, {type,loadin
 			}
 		}
 		case ACTIONS.SET_CITY_INFO: {
+			const {city_img,city_population,city_link} = city.data;
 			return {
 				stations: state.stations.map(
 					station => (
 						station.stat_num.value == city.id ? 
 						{
 							...station,
-							city_img: city.city_img,
-							city_population: city.city_population,
-							city_link: city.city_link
+							city_img: city_img,
+							city_population: city_population,
+							city_link: city_link
 						} 
 						: station
 					)

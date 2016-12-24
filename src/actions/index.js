@@ -181,6 +181,7 @@ const loadCityData = (id,city) => {
 }
 
 const addCityInfo = (city) => {
+	console.log(city);
 	return {
 		type: ACTIONS.SET_CITY_INFO,
 		loadingCity: false,
@@ -236,7 +237,7 @@ SERVICE <https://query.wikidata.org/sparql>
 			.get(`${API_URL}/?query=${query}`,queryConfig)
 			.then(response=>{
 				console.log(response.data)
-				dispatch(addCityInfo({id,name, data: response.data.results.bindings}))
+				dispatch(addCityInfo({id,name, data: response.data.results.bindings[0]}))
 			})
 	}
 };
