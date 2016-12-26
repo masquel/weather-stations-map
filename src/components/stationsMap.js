@@ -59,62 +59,68 @@ export default class stationsMap extends Component {
 							return (stationNameLowerCase.indexOf(filterStationNameLowerCase) !== -1) || (levenshtein(stationNameLowerCase,filterStationNameLowerCase) < 3) ? (
 								<FeatureGroup key={index}>
 									<Popup>
-										<div className="popup__info">
+										
 											{
 												loadingCity ? (
 													<div>
-														<p className="lead text-center">Загрузка дополнительной информации</p>
+														<p className="text-center">Загрузка информации о станции</p>
 													</div>
-												) :	(city_img || city_population) ?
-													(
-														<div>
-															{
-																city_img ? (
-																	<div className="popup__item">
-																		<img src={city_img.value} alt={location_name.value} className="img-responsive center-block"/>
+												) : (
+													<div className="popup__info">
+														{
+															(city_img || city_population) ?
+																(
+																	<div>
+																		{
+																			city_img ? (
+																				<div className="popup__item">
+																					<img src={city_img.value} alt={location_name.value} className="img-responsive center-block"/>
+																				</div>
+																			) : null
+																		}
+																		{
+																			city_population ? (
+																				<div className="popup__item">
+																					<div className="popup__item-key">Население:</div>{' '}
+																					<div className="popup__item-value">{city_population.value}</div>
+																				</div>
+																			) : null
+																		}
+																		
+																		<hr/>
 																	</div>
 																) : null
-															}
-															{
-																city_population ? (
-																	<div className="popup__item">
-																		<div className="popup__item-key">Население:</div>{' '}
-																		<div className="popup__item-value">{city_population.value}</div>
-																	</div>
-																) : null
-															}
-															
-															<hr/>
+														}
+														<div className="popup__item">
+															<div className="popup__item-key">ID:</div>{' '}
+															<div className="popup__item-value">{stat_num.value}</div>
 														</div>
-													) : null
+														<dl className="popup__item">
+															<dt className="popup__item-key">Название:</dt>{' '}
+															<dd className="popup__item-value">
+																{city_link ? <a href={city_link.value} target="_blank">{location_name.value}</a> : location_name.value}
+															</dd>
+														</dl>
+														<dl className="popup__item">
+															<div className="popup__item-key">Широта:</div>{' '}
+															<div className="popup__item-value">{lat.value}</div>
+														</dl>
+														<dl className="popup__item">
+															<div className="popup__item-key">Долгота:</div>{' '}
+															<div className="popup__item-value">{long.value}</div>
+														</dl>
+														<dl className="popup__item">
+															<dt className="popup__item-key">Высота над уровнем моря:</dt>{' '}
+															<dd className="popup__item-value">{altitude && altitude.value}</dd>
+														</dl>
+														<dl className="popup__item">
+															<div className="popup__item-key">Последние измерения:</div>{' '}
+															<div className="popup__item-value">{datemax ? datemax.value : "отсутствуют"}</div>
+														</dl>
+													</div>	
+												)
 											}
-											<div className="popup__item">
-												<div className="popup__item-key">ID:</div>{' '}
-												<div className="popup__item-value">{stat_num.value}</div>
-											</div>
-											<dl className="popup__item">
-												<dt className="popup__item-key">Название:</dt>{' '}
-												<dd className="popup__item-value">
-													{city_link ? <a href={city_link.value} target="_blank">{location_name.value}</a> : location_name.value}
-												</dd>
-											</dl>
-											<dl className="popup__item">
-												<div className="popup__item-key">Широта:</div>{' '}
-												<div className="popup__item-value">{lat.value}</div>
-											</dl>
-											<dl className="popup__item">
-												<div className="popup__item-key">Долгота:</div>{' '}
-												<div className="popup__item-value">{long.value}</div>
-											</dl>
-											<dl className="popup__item">
-												<dt className="popup__item-key">Высота над уровнем моря:</dt>{' '}
-												<dd className="popup__item-value">{altitude && altitude.value}</dd>
-											</dl>
-											<dl className="popup__item">
-												<div className="popup__item-key">Последние измерения:</div>{' '}
-												<div className="popup__item-value">{datemax ? datemax.value : "отсутствуют"}</div>
-											</dl>
-										</div>
+										
 									</Popup>
 									<CircleMarker
 										color={"#3498db"}
